@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="applications-table">
+            <!-- Applications will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch applications from localStorage
+        const applications = JSON.parse(localStorage.getItem('applications')) || [];
+        const applicationsTable = document.getElementById('applications-table');
+
+        applications.forEach(application => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${application.id}</td>
+                <td>${application.name}</td>
+                <td>${application.email}</td>
+                <td>${application.status}</td>
+                <td>
+                    <button onclick="viewDetails(${application.id})">View</button>
+                    <button onclick="approveApplication(${application.id})">Approve</button>
+                    <button onclick="rejectApplication(${application.id})">Reject</button>
+                    <button onclick="deleteApplication(${application.id})">Delete</button>
+                </td>
+            `;
+            applicationsTable.appendChild(row);
+        });
+
+        function viewDetails(id) {
+            alert('Viewing details for application ' + id);
+            // Implement view details logic
+        }
+
+        function approveApplication(id) {
+            alert('Application ' + id + ' approved.');
+            // Implement approve logic
+        }
+
+        function rejectApplication(id) {
+            alert('Application ' + id + ' rejected.');
+            // Implement reject logic
+        }
+
+        function deleteApplication(id) {
+            alert('Application ' + id + ' deleted.');
+            // Implement delete logic
+        }
+    </script>
+</body>
+</html>
